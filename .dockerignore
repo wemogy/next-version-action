@@ -1,0 +1,21 @@
+# General
+Dockerfile
+.dockerignore
+.DS_Store
+*.md
+**/env
+**/docs
+**/demo
+**/.vscode
+
+# .NET Core
+**/bin
+**/obj
+**/*.Development.json
+
+# Azure Functions
+local.settings.json
+
+# JavaScript
+**/node_modules
+**/dist

@@ -1,0 +1,12 @@
+{
+	// Styling
+	"editor.rulers": [120],
+	"editor.insertSpaces": false,
+	"editor.formatOnSave": true,
+	"yaml.format.singleQuote": true,
+
+	// Spell Checker
+	"cSpell.allowCompoundWords": true,
+	"cSpell.language": "en",
+	"cSpell.words": ["Xunit"]
+}
