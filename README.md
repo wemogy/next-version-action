@@ -23,7 +23,7 @@ GitHub Action for bumping Semantic Version Numbers based on branch name
 ## Example usage
 
 ```yaml
-- uses: wemogy/release-version-action@0.1.1
+- uses: wemogy/next-release-version-action@0.1.2
   id: release-version
   with:
     owner: 'wemogy'
