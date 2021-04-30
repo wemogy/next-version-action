@@ -1,6 +1,7 @@
 name: 'Release Version'
 description: 'Find the right semantic version for the next release'
-icon: 'arrow-up-circle'
+branding:
+  icon: 'arrow-up-circle'
 inputs:
   owner:
     description: 'Owner of the repository'
