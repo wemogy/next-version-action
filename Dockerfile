@@ -17,7 +17,7 @@ COPY ["src/Wemogy.ReleaseVersionAction/", "src/Wemogy.ReleaseVersionAction/"]
 
 # Build the application
 WORKDIR /src/Wemogy.ReleaseVersionAction/
-RUN dotnet build --output /out/ --configuration Release
+RUN dotnet publish --output /out/ --configuration Release --no-self-contained
 
 #######################################################
 # Step 2: Run the build outcome in a container        #
@@ -28,4 +28,4 @@ FROM mcr.microsoft.com/dotnet/runtime:5.0
 COPY --from=build /out .
 
 # Start the application
-ENTRYPOINT ["dotnet", "Wemogy.ReleaseVersionAction.dll"]
+ENTRYPOINT ["dotnet", "/Wemogy.ReleaseVersionAction.dll"]
