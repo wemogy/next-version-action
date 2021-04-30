@@ -23,6 +23,8 @@ inputs:
 outputs:
   next-version:
     description: 'The next semantic version for the next release'
+  folder:
+    description: 'The name of the folder for the branch'
 runs:
   using: 'docker'
   image: 'Dockerfile'
