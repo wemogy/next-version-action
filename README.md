@@ -18,11 +18,12 @@ GitHub Action for bumping Semantic Version Numbers based on branch name
 | Output | Description |
 |-|-|
 | `next-version` | The next semantic version for the next release |
+| `folder` | The name of the folder for the branch |
 
 ## Example usage
 
 ```yaml
-- uses: wemogy/release-version-action@1.0.0
+- uses: wemogy/release-version-action@0.1.1
   id: release-version
   with:
     owner: 'wemogy'

@@ -69,6 +69,7 @@ namespace Wemogy.ReleaseVersionAction
 				: $"No current version for branch {options.Branch}");
 			Console.WriteLine($"Next version for branch {options.Branch} is: {nextVersion}");
 			Console.WriteLine($"::set-output name=next-version::{nextVersion}");
+			Console.WriteLine($"::set-output name=folder::{folderName}");
 		}
 
 		static Task HandleParseError(IEnumerable<Error> errors)

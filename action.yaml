@@ -1,4 +1,4 @@
-name: 'Release Version'
+name: 'Next Release Version'
 description: 'Find the right semantic version for the next release'
 branding:
   icon: 'arrow-up-circle'
@@ -26,6 +26,8 @@ inputs:
 outputs:
   next-version:
     description: 'The next semantic version for the next release'
+  folder:
+    description: 'The name of the folder for the branch'
 runs:
   using: 'docker'
   image: 'Dockerfile'
