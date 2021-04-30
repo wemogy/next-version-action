@@ -18,6 +18,7 @@ GitHub Action for bumping Semantic Version Numbers based on branch name
 | Output | Description |
 |-|-|
 | `next-version` | The next semantic version for the next release |
+| `folder` | The name of the folder for the branch |
 
 ## Example usage
 
