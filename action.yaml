@@ -32,8 +32,13 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - '--owner ${{ inputs.owner }}'
-    - '--repo ${{ inputs.repo }}'
-    - '--token ${{ inputs.token }}'
-    - '--branch ${{ inputs.branch }}'
-    - '--project ${{ inputs.project }}'
+    - --owner
+    - ${{ inputs.owner }}
+    - --repo
+    - ${{ inputs.repo }}
+    - --token
+    - ${{ inputs.token }}
+    - --branch
+    - ${{ inputs.branch }}
+    - --project
+    - ${{ inputs.project }}
