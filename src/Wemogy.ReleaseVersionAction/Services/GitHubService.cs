@@ -18,14 +18,17 @@ namespace Wemogy.ReleaseVersionAction.Services
 		{
 			_httpClient = new HttpClient();
 			_httpClient.BaseAddress = new Uri("https://api.github.com");
+			_httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("wemogy-action", "1"));
 			_httpClient.DefaultRequestHeaders.Authorization =
 				new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{token}")));
+
 		}
 
 		public async Task<List<Tag>> GetAllTagsAsync(string owner, string repository)
 		{
 			var url = $"/repos/{owner}/{repository}/releases";
-			var json = await _httpClient.GetStringAsync(url);
+			var response = await _httpClient.GetAsync(url);
+			var json = await response.Content.ReadAsStringAsync();
 			var tags = JsonSerializer.Deserialize<List<Tag>>(json);
 			return tags;
 		}
