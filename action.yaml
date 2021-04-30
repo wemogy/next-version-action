@@ -2,6 +2,7 @@ name: 'Release Version'
 description: 'Find the right semantic version for the next release'
 branding:
   icon: 'arrow-up-circle'
+  color: 'blue'
 inputs:
   owner:
     description: 'Owner of the repository'
