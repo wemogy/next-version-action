@@ -74,9 +74,8 @@ namespace Wemogy.ReleaseVersionAction
 
 		static Task HandleParseError(IEnumerable<Error> errors)
 		{
-			Console.WriteLine("Wrong input.");
-			return Task.FromResult(1);
+			Environment.Exit(1);
+			return Task.CompletedTask;
 		}
     }
 }
-

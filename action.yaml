@@ -36,6 +36,8 @@ runs:
     - ${{ inputs.owner }}
     - --repo
     - ${{ inputs.repo }}
+    - --username
+    - ${{ inputs.username }}
     - --token
     - ${{ inputs.token }}
     - --branch
