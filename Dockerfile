@@ -4,9 +4,6 @@
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 as build
 
-ARG NUGET_USERNAME
-ARG NUGET_TOKEN
-
 # Copy .csproj files for NuGet restore
 COPY ["src/Wemogy.ReleaseVersionAction/Wemogy.ReleaseVersionAction.csproj", "src/Wemogy.ReleaseVersionAction/"]
 
@@ -28,4 +25,4 @@ FROM mcr.microsoft.com/dotnet/runtime:5.0
 COPY --from=build /out .
 
 # Start the application
-ENTRYPOINT ["dotnet", "/Wemogy.ReleaseVersionAction.dll"]
+ENTRYPOINT ["dotnet", "/Wemogy.ReleaseVersionAction.dll"] # Use /... as GitHub overrides the working directory
