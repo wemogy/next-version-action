@@ -1,4 +1,4 @@
-# Next Version
+# Next Version (GitHub Action)
 
 A GitHub Actions Task for determining the Semantic Version for the next release based on branch name and existing releases.
 
@@ -28,7 +28,7 @@ Check the examples below for more details.
 ## Usage
 
 ```yaml
-- uses: wemogy/next-version-action@0.1.6
+- uses: wemogy/next-version-action@1.0.0
   id: release-version
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
@@ -39,7 +39,7 @@ Check the examples below for more details.
 
 ## Examples
 
-### Single project
+### Single project repo
 
 Given your repo has GitHub Releases with the following tags:
 
@@ -68,13 +68,12 @@ then a task with the configuration below generates the following outputs:
 - run: echo ${{ steps.release-version.outputs.folder }} # Output: <empty>
 ```
 
-### Multiple projects
+### Multiple projects repo
 
 Given your repo contains multiple projects in the following folders:
 
 - `project-a`
 - `project-b`
-
 
 GitHub Releases with the following tags:
 
