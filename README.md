@@ -82,7 +82,7 @@ Given your repo contains multiple projects in the following folders:
 - `/project-a`
 - `/project-b`
 
-GitHub Releases with the following tags:
+and GitHub Releases with the following tags:
 
 - `project-a-1.0.0`
 - `project-a-1.1.0`
