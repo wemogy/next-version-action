@@ -58,7 +58,7 @@ and the following branches:
 then a task with the configuration below generates the following outputs:
 
 ```yaml
-- uses: wemogy/next-release-version-action@0.1.6
+- uses: wemogy/next-release-version-action@1.0.0
   id: release-version
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
@@ -91,7 +91,7 @@ and the following branches:
 then a task with the configuration below generates the following outputs:
 
 ```yaml
-- uses: wemogy/next-release-version-action@0.1.6
+- uses: wemogy/next-release-version-action@1.0.0
   id: release-version
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
