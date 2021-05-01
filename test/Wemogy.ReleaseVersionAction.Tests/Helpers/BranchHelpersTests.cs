@@ -8,6 +8,7 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
 		[Theory]
 		[InlineData("refs/heads/release/configuration/0.1", "configuration")]
 		[InlineData("refs/heads/release/data-access/0.2", "data-access")]
+		[InlineData("release/data-access/0.2", "data-access")]
 		public void ExtractFolderName_Works(string branch, string expected)
 		{
 			// Act
@@ -20,7 +21,9 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
 		[Theory]
 		[InlineData("refs/heads/release/configuration/0.1", "configuration", 0, 1)]
 		[InlineData("refs/heads/release/data-access/0.2", "data-access", 0, 2)]
+		[InlineData("release/data-access/0.2", "data-access", 0, 2)]
 		[InlineData("refs/heads/release/0.2", "", 0, 2)]
+		[InlineData("release/0.2", "", 0, 2)]
 		public void ExtractMajorMinorVersion_Works(string branch, string folderName, int expectedMajor, int expectedMinor)
 		{
 			// Act

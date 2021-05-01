@@ -1,6 +1,6 @@
-# Next Release Version GitHub Action
+# Next Release Version
 
-GitHub Action for bumping Semantic Version Numbers based on branch name
+A GitHub Actions Task for determining the Semantic Version for the next release based on branch name and existing releases.
 
 ## Inputs
 

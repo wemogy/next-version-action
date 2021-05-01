@@ -4,21 +4,22 @@ branding:
   icon: 'arrow-up-circle'
   color: 'blue'
 inputs:
-  owner:
-    description: 'Owner of the repository'
-    required: true
   repo:
     description: 'The repository name'
-    required: true
+    default: ${{ github.repository }}
+    required: false
   username:
     description: 'GitHub username'
-    required: true
+    default: ${{ github.repository_owner }}
+    required: false
   token:
     description: 'GitHub token'
-    required: true
+    default: ${{ secrets.GITHUB_TOKEN }}
+    required: false
   branch:
     description: 'The current branch'
-    required: true
+    default: ${{ github.ref }}
+    required: false
   project:
     description: 'The Project Type (Single or Multi)'
     required: false
@@ -32,8 +33,6 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - --owner
-    - ${{ inputs.owner }}
     - --repo
     - ${{ inputs.repo }}
     - --username

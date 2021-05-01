@@ -6,6 +6,6 @@ namespace Wemogy.ReleaseVersionAction.Abstractions
 {
 	public interface IGitHubService
 	{
-		Task<List<Tag>> GetAllTagsAsync(string owner, string repository);
+		Task<List<Tag>> GetAllTagsAsync(string repository);
 	}
 }

@@ -5,9 +5,6 @@ namespace Wemogy.ReleaseVersionAction
 {
     public class Options
 	{
-		[Option('o', "owner", Required = true, HelpText = "")]
-		public string Owner { get; set; }
-
 		[Option('r', "repo", Required = true, HelpText = "")]
 		public string Repository { get; set; }
 

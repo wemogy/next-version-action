@@ -26,7 +26,7 @@ namespace Wemogy.ReleaseVersionAction.IntegrationTests.Services
 			var gitHubService = Setup();
 
 			// Act
-			var tags = await gitHubService.GetAllTagsAsync("wemogy", "libs");
+			var tags = await gitHubService.GetAllTagsAsync("wemogy/libs");
 
 			// Assert
 			Assert.NotEmpty(tags);
