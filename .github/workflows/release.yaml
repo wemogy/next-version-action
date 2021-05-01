@@ -9,7 +9,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    steps:   
+    steps:
 
     # Get folder name from branch name. All release branches must have the same name as the folder of their project.
     # Example: the release/foo/0.1 branch is for the project in the /foo folder.
@@ -25,7 +25,8 @@ jobs:
 
     # Setup
     - uses: actions/checkout@v2
-    - uses: actions/setup-dotnet@v1
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
         source-url: https://nuget.pkg.github.com/wemogy/index.json
@@ -38,10 +39,10 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal      
+      run: dotnet test --no-build --verbosity normal
       env:
         RedisCache__ConnectionString: ${{ secrets.REDIS_CONNECTION_STRING }}
-        AzureBlobStorage__ConnectionString: ${{ secrets.AZUREBLOBSTORAGE_CONNECTION_STRING }}    
+        AzureBlobStorage__ConnectionString: ${{ secrets.AZUREBLOBSTORAGE_CONNECTION_STRING }}
     - name: Docker
       run: docker build .
 
