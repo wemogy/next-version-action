@@ -3,11 +3,11 @@
 A GitHub Action for determining the version for the next release based on branch name and existing releases. This Action expects, that you use [Semantic Versioning](https://semver.org/) for your project
 
 
-**Single Project Repository**
+#### Single Project Repository
 
-If your repository hosts a single project, this Action expects, that you manage releases in `release/x.y` branches, where `x` is the major and `y` is the minor version and that GitHub Releases are tagged with `x.y.z`. The Action fetches all existing Github Releases form the repository and finds the highest one for the branch it is executed on. Then it returns this version's patch number increased by one.
+If your repository hosts a single project, this Action expects, that you manage releases in `release/x.y` branches, and that GitHub Releases are tagged with `x.y.z`. The Action fetches all existing Github Releases form the repository and finds the highest one for the branch it is executed on. Then it returns this version's patch number increased by one.
 
-**Mutli Project Repository**
+### Mutli Project Repository
 
 If your repository hosts more than one project and these projects have individual lifecycles, this Action expects, that these projects are located in different folders on root level and that the releases are managed in `release/folder/x.y` branches, where `folder` matches the exact folder name of the project. The task then finds the latest matching GitHub Release with a `folder-x.y.z` tag and increases that number.
 
@@ -73,12 +73,14 @@ then a task with the configuration below generates the following outputs:
 - run: echo ${{ steps.release-version.outputs.folder }} # Output: <empty>
 ```
 
+In this example, the Action identifies version `1.1.1` as the hightest one for the `release/1.1` tag. So the next patch version would be `1.1.2`.
+
 ### Multi Project Repository
 
 Given your repo contains multiple projects in the following folders:
 
-- `project-a`
-- `project-b`
+- `/project-a`
+- `/project-b`
 
 GitHub Releases with the following tags:
 
@@ -106,3 +108,5 @@ then a task with the configuration below generates the following outputs:
 - run: echo ${{ steps.release-version.outputs.next-version }} # Output: 1.1.1
 - run: echo ${{ steps.release-version.outputs.folder }} # Output: project-a
 ```
+
+In this example, the Action identifies version `1.1.0` as the hightest one for the `elease/project-a/1.1` tag. So the next patch version would be `1.1.1`.
