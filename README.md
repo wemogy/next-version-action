@@ -22,7 +22,7 @@ A GitHub Actions Task for determining the Semantic Version for the next release 
 ## Example usage
 
 ```yaml
-- uses: wemogy/next-release-version-action@0.1.2
+- uses: wemogy/next-release-version-action@0.1.6
   id: release-version
   with:    
     token: ${{ secrets.GITHUB_TOKEN }}
