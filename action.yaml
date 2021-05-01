@@ -14,8 +14,7 @@ inputs:
     required: false
   token:
     description: 'GitHub token'
-    default: ${{ secrets.GITHUB_TOKEN }}
-    required: false
+    required: true
   branch:
     description: 'The current branch'
     default: ${{ github.ref }}
