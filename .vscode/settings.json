@@ -8,5 +8,8 @@
 	// Spell Checker
 	"cSpell.allowCompoundWords": true,
 	"cSpell.language": "en",
-	"cSpell.words": ["Xunit"]
+	"cSpell.words": [
+		"Skippable",
+		"Xunit"
+	]
 }
