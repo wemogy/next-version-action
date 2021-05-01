@@ -7,7 +7,7 @@ A GitHub Action for determining the version for the next release based on branch
 
 If your repository hosts a single project, this Action expects, that you manage releases in `release/x.y` branches, and that GitHub Releases are tagged with `x.y.z`. The Action fetches all existing Github Releases form the repository and finds the highest one for the branch it is executed on. Then it returns this version's patch number increased by one.
 
-### Mutli Project Repository
+#### Mutli Project Repository
 
 If your repository hosts more than one project and these projects have individual lifecycles, this Action expects, that these projects are located in different folders on root level and that the releases are managed in `release/folder/x.y` branches, where `folder` matches the exact folder name of the project. The task then finds the latest matching GitHub Release with a `folder-x.y.z` tag and increases that number.
 
