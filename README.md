@@ -1,10 +1,15 @@
 # Next Version (GitHub Action)
 
-A GitHub Actions Task for determining the Semantic Version for the next release based on branch name and existing releases.
+A GitHub Action for determining the version for the next release based on branch name and existing releases. This Action expects, that you use [Semantic Versioning](https://semver.org/) for your project
 
-This task expects, that you use [Semantic Versioning](https://semver.org/) and manage releases in `release/x.y` branches, where `x` is the major and `y` is the minor version. Once executed, the task fetches all existing Github Releases form the repository and finds the highest one for the branch it is executed on. Then it returns this version's patch number increased by one.
 
-If your repository hosts more than one project and these projects have individual lifecycles, this task expects, that these projects are located in different folders on root level and that the releases are managed in `release/folder/x.y` branches, where `folder` matches the exact folder name of the project. The task then finds the latest matching GitHub Release with a `folder-x.y.z` tag and increases that number.
+**Single Project Repository**
+
+If your repository hosts a single project, this Action expects, that you manage releases in `release/x.y` branches, where `x` is the major and `y` is the minor version and that GitHub Releases are tagged with `x.y.z`. The Action fetches all existing Github Releases form the repository and finds the highest one for the branch it is executed on. Then it returns this version's patch number increased by one.
+
+**Mutli Project Repository**
+
+If your repository hosts more than one project and these projects have individual lifecycles, this Action expects, that these projects are located in different folders on root level and that the releases are managed in `release/folder/x.y` branches, where `folder` matches the exact folder name of the project. The task then finds the latest matching GitHub Release with a `folder-x.y.z` tag and increases that number.
 
 Check the examples below for more details.
 
@@ -39,7 +44,7 @@ Check the examples below for more details.
 
 ## Examples
 
-### Single project repo
+### Single Project Repository
 
 Given your repo has GitHub Releases with the following tags:
 
@@ -68,7 +73,7 @@ then a task with the configuration below generates the following outputs:
 - run: echo ${{ steps.release-version.outputs.folder }} # Output: <empty>
 ```
 
-### Multiple projects repo
+### Multi Project Repository
 
 Given your repo contains multiple projects in the following folders:
 
