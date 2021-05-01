@@ -42,6 +42,8 @@ jobs:
       env:
         RedisCache__ConnectionString: ${{ secrets.REDIS_CONNECTION_STRING }}
         AzureBlobStorage__ConnectionString: ${{ secrets.AZUREBLOBSTORAGE_CONNECTION_STRING }}    
+    - name: Docker
+      run: docker build .
 
     # Create GitHub Release
     - name: Create GitHub Release
