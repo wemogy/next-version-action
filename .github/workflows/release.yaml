@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - release/**
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:   
+
+    # Get folder name from branch name. All release branches must have the same name as the folder of their project.
+    # Example: the release/foo/0.1 branch is for the project in the /foo folder.
+    - uses: wemogy/release-version-action@0.1.3
+      id: release-version
+      with:
+        owner: ${{ github.repository_owner }}
+        repo: 'next-release-version-action'
+        username: ${{ github.repository_owner }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+        project: 'Single'
+
+    # Setup
+    - uses: actions/checkout@v2
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+        source-url: https://nuget.pkg.github.com/wemogy/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.PACKAGE_FEED_TOKEN }}
+
+    # Build and Test
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal      
+      env:
+        RedisCache__ConnectionString: ${{ secrets.REDIS_CONNECTION_STRING }}
+        AzureBlobStorage__ConnectionString: ${{ secrets.AZUREBLOBSTORAGE_CONNECTION_STRING }}    
+
+    # Create GitHub Release
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.release-version.outputs.next-version }}
+        name: Version (${{ steps.release-version.outputs.next-version }})
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
