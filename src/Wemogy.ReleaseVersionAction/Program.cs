@@ -36,7 +36,7 @@ namespace Wemogy.ReleaseVersionAction
 
 			// Get all tags from GitHub
 			Console.Write("GitHub release tags found: ");
-			var tags = await _gitHubService.GetAllTagsAsync(options.Owner, options.Repository);
+			var tags = await _gitHubService.GetAllTagsAsync(options.Repository);
 			foreach (var tag in tags)
 				Console.Write(tag.TagName + ", ");
 			Console.WriteLine();

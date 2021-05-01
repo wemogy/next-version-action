@@ -24,9 +24,9 @@ namespace Wemogy.ReleaseVersionAction.Services
 
 		}
 
-		public async Task<List<Tag>> GetAllTagsAsync(string owner, string repository)
+		public async Task<List<Tag>> GetAllTagsAsync(string repository)
 		{
-			var url = $"/repos/{owner}/{repository}/releases";
+			var url = $"/repos/{repository}/releases";
 			var response = await _httpClient.GetAsync(url);
 			var json = await response.Content.ReadAsStringAsync();
 			var tags = JsonSerializer.Deserialize<List<Tag>>(json);
