@@ -6,9 +6,9 @@ A GitHub Actions Task for determining the Semantic Version for the next release 
 
 | Input | Description |
 |-|-|
+| `token` | **Required** A GitHub Access Token |
 | `repo` | The repository name (Default: current repository) |
 | `username` | The GitHub username (Default: current repository owner) |
-| `token` | **Required** A GitHub Access Token |
 | `branch` | The release branch (Default: current branch) |
 | `project` | The Project Type (Single or Multi) (Default: Single) |
 
