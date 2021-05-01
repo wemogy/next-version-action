@@ -1,6 +1,6 @@
 # Next Release Version
 
-A GitHub Action Task for determining the Semantic Version for the next release based on branch name and existing releases.
+A GitHub Actions Task for determining the Semantic Version for the next release based on branch name and existing releases.
 
 ## Inputs
 
