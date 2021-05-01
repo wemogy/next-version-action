@@ -6,11 +6,10 @@ A GitHub Actions Task for determining the Semantic Version for the next release 
 
 | Input | Description |
 |-|-|
-| `owner` | **Required** The owner of the repository |
-| `repo` | **Required** The repository name |
-| `username` | **Required** The GitHub username |
-| `token` | **Required** The GitHub token |
-| `branch` | **Required** The current branch |
+| `repo` | The repository name (Default: current repository) |
+| `username` | The GitHub username (Default: current repository owner) |
+| `token` | **Required** A GitHub Access Token |
+| `branch` | The release branch (Default: current branch) |
 | `project` | The Project Type (Single or Multi) (Default: Single) |
 
 ## Outputs
@@ -25,12 +24,9 @@ A GitHub Actions Task for determining the Semantic Version for the next release 
 ```yaml
 - uses: wemogy/next-release-version-action@0.1.2
   id: release-version
-  with:
-    owner: 'wemogy'
-    repo: 'hello-world'
-    username: $GITHUB_ACTOR
+  with:    
     token: ${{ secrets.GITHUB_TOKEN }}
-    branch: ${{ github.ref }}
+    project: 'Single'
     
 - run: echo ${{ steps.release-version.outputs.next-version }}
 ```
