@@ -27,9 +27,9 @@ namespace Wemogy.ReleaseVersionAction
 		{
 			_gitHubService = new GitHubService(options.Username, options.Token);
 
-			Console.WriteLine($"Running in {options.ProjectType} Project mode.");
+			Console.WriteLine($"Running in {options.Projects} Project mode.");
 
-			var folderName = options.ProjectType == Enums.ProjectType.Multi ? BranchHelpers.ExtractFolderName(options.Branch) : "";
+			var folderName = options.Projects == Enums.ProjectsType.Multi ? BranchHelpers.ExtractFolderName(options.Branch) : "";
 			var currentMajorMinorVersion = BranchHelpers.ExtractMajorMinorVersion(options.Branch, folderName);
 			SemVersion nextVersion = currentMajorMinorVersion;
 			SemVersion currentVersion = null;

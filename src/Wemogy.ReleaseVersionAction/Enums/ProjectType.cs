@@ -1,6 +1,6 @@
 namespace Wemogy.ReleaseVersionAction.Enums
 {
-    public enum ProjectType
+    public enum ProjectsType
     {
         Single,
 		Multi

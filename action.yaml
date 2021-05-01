@@ -1,5 +1,5 @@
-name: 'Next Release Version'
-description: 'Find the right semantic version for the next release'
+name: 'Next Version'
+description: 'Find the Semantic Version for the next release based on branch name and existing releases'
 branding:
   icon: 'arrow-up-circle'
   color: 'blue'
