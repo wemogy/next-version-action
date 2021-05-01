@@ -13,6 +13,18 @@ If your repository hosts more than one project and these projects have individua
 
 Check the examples below for more details.
 
+## Usage
+
+```yaml
+- uses: wemogy/next-version-action@1.0.0
+  id: release-version
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}
+    projects: 'Single'
+
+- run: echo ${{ steps.release-version.outputs.next-version }}
+```
+
 ## Inputs
 
 | Input | Description |
@@ -29,18 +41,6 @@ Check the examples below for more details.
 |-|-|
 | `next-version` | The next semantic version for the next release |
 | `folder` | The name of the folder for the branch |
-
-## Usage
-
-```yaml
-- uses: wemogy/next-version-action@1.0.0
-  id: release-version
-  with:
-    token: ${{ secrets.GITHUB_TOKEN }}
-    projects: 'Single'
-
-- run: echo ${{ steps.release-version.outputs.next-version }}
-```
 
 ## Examples
 
