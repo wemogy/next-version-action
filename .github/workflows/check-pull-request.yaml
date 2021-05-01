@@ -1,8 +1,6 @@
 name: Check Pull Request
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
 
 jobs:
@@ -14,6 +12,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.PACKAGE_FEED_TOKEN }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
