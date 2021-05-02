@@ -1,4 +1,4 @@
-name: 'Next Version'
+name: 'Next Release Version'
 description: 'Find the Semantic Version for the next release based on branch name and existing releases'
 branding:
   icon: 'arrow-up-circle'
