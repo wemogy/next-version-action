@@ -1,12 +1,29 @@
-# Next Version (GitHub Action)
+# ![wemogy](assets/wemogy-logo.png) Next Version (GitHub Action)
 
-A GitHub Actions Task for determining the Semantic Version for the next release based on branch name and existing releases.
+A GitHub Action for determining the version for the next release based on branch name and existing releases. This Action expects, that you use [Semantic Versioning](https://semver.org/) for your project
 
-This task expects, that you use [Semantic Versioning](https://semver.org/) and manage releases in `release/x.y` branches, where `x` is the major and `y` is the minor version. Once executed, the task fetches all existing Github Releases form the repository and finds the highest one for the branch it is executed on. Then it returns this version's patch number increased by one.
 
-If your repository hosts more than one project and these projects have individual lifecycles, this task expects, that these projects are located in different folders on root level and that the releases are managed in `release/folder/x.y` branches, where `folder` matches the exact folder name of the project. The task then finds the latest matching GitHub Release with a `folder-x.y.z` tag and increases that number.
+#### Single Project Repository
+
+If your repository hosts a single project, this Action expects, that you manage releases in `release/x.y` branches, and that GitHub Releases are tagged with `x.y.z`. The Action fetches all existing Github Releases form the repository and finds the highest one for the branch it is executed on. Then it returns this version's patch number increased by one.
+
+#### Mutli Project Repository
+
+If your repository hosts more than one project and these projects have individual lifecycles, this Action expects, that these projects are located in different folders on root level and that the releases are managed in `release/folder/x.y` branches, where `folder` matches the exact folder name of the project. The task then finds the latest matching GitHub Release with a `folder-x.y.z` tag and increases that number.
 
 Check the examples below for more details.
+
+## Usage
+
+```yaml
+- uses: wemogy/next-version-action@1.0.1
+  id: release-version
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}
+    projects: 'Single'
+
+- run: echo ${{ steps.release-version.outputs.next-version }}
+```
 
 ## Inputs
 
@@ -25,21 +42,9 @@ Check the examples below for more details.
 | `next-version` | The next semantic version for the next release |
 | `folder` | The name of the folder for the branch |
 
-## Usage
-
-```yaml
-- uses: wemogy/next-version-action@1.0.0
-  id: release-version
-  with:
-    token: ${{ secrets.GITHUB_TOKEN }}
-    projects: 'Single'
-
-- run: echo ${{ steps.release-version.outputs.next-version }}
-```
-
 ## Examples
 
-### Single project repo
+### Single Project Repository
 
 Given your repo has GitHub Releases with the following tags:
 
@@ -58,7 +63,7 @@ and the following branches:
 then a task with the configuration below generates the following outputs:
 
 ```yaml
-- uses: wemogy/next-release-version-action@0.1.6
+- uses: wemogy/next-release-version-action@1.0.1
   id: release-version
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
@@ -68,14 +73,16 @@ then a task with the configuration below generates the following outputs:
 - run: echo ${{ steps.release-version.outputs.folder }} # Output: <empty>
 ```
 
-### Multiple projects repo
+In this example, the Action identifies version `1.1.1` as the hightest one for the `release/1.1` tag. So the next patch version would be `1.1.2`.
+
+### Multi Project Repository
 
 Given your repo contains multiple projects in the following folders:
 
-- `project-a`
-- `project-b`
+- `/project-a`
+- `/project-b`
 
-GitHub Releases with the following tags:
+and GitHub Releases with the following tags:
 
 - `project-a-1.0.0`
 - `project-a-1.1.0`
@@ -91,7 +98,7 @@ and the following branches:
 then a task with the configuration below generates the following outputs:
 
 ```yaml
-- uses: wemogy/next-release-version-action@0.1.6
+- uses: wemogy/next-release-version-action@1.0.1
   id: release-version
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
@@ -101,3 +108,5 @@ then a task with the configuration below generates the following outputs:
 - run: echo ${{ steps.release-version.outputs.next-version }} # Output: 1.1.1
 - run: echo ${{ steps.release-version.outputs.folder }} # Output: project-a
 ```
+
+In this example, the Action identifies version `1.1.0` as the hightest one for the `elease/project-a/1.1` tag. So the next patch version would be `1.1.1`.
