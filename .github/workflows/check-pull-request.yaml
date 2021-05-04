@@ -25,4 +25,4 @@ jobs:
       run: docker build .
 
     - name: Run the Action
-      uses: /
+      uses: './'
