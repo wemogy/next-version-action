@@ -19,7 +19,7 @@ inputs:
     description: 'The current branch'
     default: ${{ github.ref }}
     required: false
-  project:
+  projects:
     description: 'The Project Type (Single or Multi)'
     required: false
     default: 'Single'
@@ -40,5 +40,5 @@ runs:
     - ${{ inputs.token }}
     - --branch
     - ${{ inputs.branch }}
-    - --project
-    - ${{ inputs.project }}
+    - --projects
+    - ${{ inputs.projects }}
