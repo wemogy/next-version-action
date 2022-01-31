@@ -15,9 +15,6 @@ jobs:
     - uses: wemogy/next-version-action@1.0.1
       id: release-version
       with:
-        owner: ${{ github.repository_owner }}
-        repo: 'next-version-action'
-        username: ${{ github.repository_owner }}
         token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
         projects: 'Single'
