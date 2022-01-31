@@ -10,8 +10,8 @@ using Wemogy.ReleaseVersionAction.Models;
 
 namespace Wemogy.ReleaseVersionAction.Services
 {
-    public class GitHubService : IGitHubService
-    {
+	public class GitHubService : IGitHubService
+	{
 		readonly HttpClient _httpClient;
 
 		public GitHubService(string username, string token)
@@ -21,7 +21,6 @@ namespace Wemogy.ReleaseVersionAction.Services
 			_httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("wemogy-action", "1"));
 			_httpClient.DefaultRequestHeaders.Authorization =
 				new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{token}")));
-
 		}
 
 		public async Task<List<Tag>> GetAllTagsAsync(string repository)
@@ -32,5 +31,5 @@ namespace Wemogy.ReleaseVersionAction.Services
 			var tags = JsonSerializer.Deserialize<List<Tag>>(json);
 			return tags;
 		}
-    }
+	}
 }
