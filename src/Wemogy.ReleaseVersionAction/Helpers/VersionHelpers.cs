@@ -9,9 +9,16 @@ namespace Wemogy.ReleaseVersionAction.Helpers
 	{
 		public static SemVersion GetCurrentVersionFromTags(List<Tag> tags, SemVersion currentMajorMinorVersion, string folderName)
 		{
-			// Filter relevant tags only and extract semantic version number only
+			// // Filter relevant tags only
+			if (!string.IsNullOrEmpty(folderName))
+			{
+				tags = tags
+					.Where(x => x.TagName.Substring(0, x.TagName.LastIndexOf("-")).Equals(folderName))
+					.ToList();
+			}
+
+			// Extract semantic version number only
 			var filtered = tags
-				.Where(x => x.TagName.Substring(0, x.TagName.LastIndexOf("-")).Equals(folderName))
 				.Select(x => SemVersion.Parse(TagHelpers.ExtractVersion(x, folderName)))
 				.Where(x => x.Major == currentMajorMinorVersion.Major && x.Minor == currentMajorMinorVersion.Minor)
 				.ToList();
@@ -28,8 +35,10 @@ namespace Wemogy.ReleaseVersionAction.Helpers
 				// Get latest Tag
 				return sorted.Last();
 			}
-
-			return currentMajorMinorVersion;
+			else
+			{
+				return currentMajorMinorVersion;
+			}
 		}
 	}
 }
