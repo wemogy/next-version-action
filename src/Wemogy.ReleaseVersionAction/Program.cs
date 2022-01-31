@@ -10,11 +10,11 @@ using Wemogy.ReleaseVersionAction.Services;
 
 namespace Wemogy.ReleaseVersionAction
 {
-    class Program
-    {
+	class Program
+	{
 		static IGitHubService _gitHubService;
 
-		static  async Task Main(string[] args)
+		static async Task Main(string[] args)
 		{
 			var result = Parser.Default.ParseArguments<Options>(args);
 			await result.MapResult(
@@ -29,10 +29,9 @@ namespace Wemogy.ReleaseVersionAction
 
 			Console.WriteLine($"Running in {options.Projects} Project mode.");
 
-			var folderName = options.Projects == Enums.ProjectsType.Multi ? BranchHelpers.ExtractFolderName(options.Branch) : "";
-			var currentMajorMinorVersion = BranchHelpers.ExtractMajorMinorVersion(options.Branch, folderName);
-			SemVersion nextVersion = currentMajorMinorVersion;
-			SemVersion currentVersion = null;
+			var folderName = options.Projects == Enums.ProjectsType.Multi
+				? BranchHelpers.ExtractFolderName(options.Branch)
+				: "";
 
 			// Get all tags from GitHub
 			Console.Write("GitHub release tags found: ");
@@ -41,26 +40,13 @@ namespace Wemogy.ReleaseVersionAction
 				Console.Write(tag.TagName + ", ");
 			Console.WriteLine();
 
-			// Filter relevant tags only and extract semantic version number only
-			var filtered = tags
-				.Where(x => x.TagName.Contains(folderName))
-				.Select(x => SemVersion.Parse(TagHelpers.ExtractVersion(x, folderName)))
-				.Where(x => x.Major == currentMajorMinorVersion.Major && x.Minor == currentMajorMinorVersion.Minor)
-				.ToList();
-
-			if (filtered.Any())
+			// Get current version
+			var currentMajorMinorVersion = BranchHelpers.ExtractMajorMinorVersion(options.Branch, folderName);
+			SemVersion nextVersion = currentMajorMinorVersion;
+			SemVersion currentVersion = VersionHelpers.GetCurrentVersionFromTags(tags, currentMajorMinorVersion, folderName);
+			if (currentVersion != null)
 			{
-				// Sort Tags lowest first
-				var sorted = filtered
-					.OrderBy(x => x.Major)
-					.ThenBy(x => x.Minor)
-					.ThenBy(x => x.Patch)
-					.ThenBy(x => x.Prerelease);
-
-				// Get latest Tag
-				currentVersion = sorted.Last();
-
-				// Bump version number
+				// Update next version
 				nextVersion = new SemVersion(currentVersion.Major, currentVersion.Minor, currentVersion.Patch + 1);
 			}
 
@@ -77,5 +63,5 @@ namespace Wemogy.ReleaseVersionAction
 			Environment.Exit(1);
 			return Task.CompletedTask;
 		}
-    }
+	}
 }
