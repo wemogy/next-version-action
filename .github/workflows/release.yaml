@@ -12,11 +12,11 @@ jobs:
     steps:
 
     # Determine Release Version
-    - uses: wemogy/release-version-action@1.0.1
+    - uses: wemogy/next-version-action@1.0.1
       id: release-version
       with:
         owner: ${{ github.repository_owner }}
-        repo: 'next-release-version-action'
+        repo: 'next-version-action'
         username: ${{ github.repository_owner }}
         token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
