@@ -7,29 +7,29 @@ namespace Wemogy.ReleaseVersionAction.IntegrationTests.Services
 {
     public class GitHubServiceTests
     {
-		private static GitHubService Setup()
-		{
-			var configuration = ConfigurationFactory.BuildConfiguration();
+        private static GitHubService Setup()
+        {
+            var configuration = ConfigurationFactory.BuildConfiguration();
             var username = configuration["GitHub:Username"];
             var token = configuration["GitHub:Token"];
 
-			Skip.If(string.IsNullOrEmpty(username), "No GitHub Username was given.");
-			Skip.If(string.IsNullOrEmpty(token), "No GitHub Token was given.");
+            Skip.If(string.IsNullOrEmpty(username), "No GitHub Username was given.");
+            Skip.If(string.IsNullOrEmpty(token), "No GitHub Token was given.");
 
-			return new GitHubService(username, token);
-		}
+            return new GitHubService(username, token);
+        }
 
-		[SkippableFact]
+        [SkippableFact]
         public async Task GetAllTagsAsync_ReturnsTags()
-		{
-			// Arrange
-			var gitHubService = Setup();
+        {
+            // Arrange
+            var gitHubService = Setup();
 
-			// Act
-			var tags = await gitHubService.GetAllTagsAsync("wemogy/libs");
+            // Act
+            var tags = await gitHubService.GetAllTagsAsync("wemogy/libs");
 
-			// Assert
-			Assert.NotEmpty(tags);
-		}
+            // Assert
+            Assert.NotEmpty(tags);
+        }
     }
 }

@@ -1,12 +1,19 @@
-# General
-Dockerfile
-.dockerignore
-.DS_Store
+# General files and folders to be ignored everywhere
+**/.git
+**/.DS_Store
 *.md
-**/env
 **/docs
 **/demo
 **/.vscode
+
+# Enviroment folder only to be ignored in the root of the project
+# On root level, this folder contains Terraform and other files. Within a project, this folder can contain important
+# files like stage and version information that should not be ignored.
+/env
+
+# Docker
+**/Dockerfile
+**/.dockerignore
 
 # .NET Core
 **/bin
@@ -14,7 +21,7 @@ Dockerfile
 **/*.Development.json
 
 # Azure Functions
-local.settings.json
+**/local.settings.json
 
 # JavaScript
 **/node_modules
