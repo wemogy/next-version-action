@@ -25,7 +25,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
       working-directory: src
     - name: Docker
-      run: docker build
+      run: docker build .
 
     - name: Run the Action
       uses: './'
