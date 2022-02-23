@@ -23,9 +23,15 @@ inputs:
     description: 'The Project Type (Single or Multi)'
     required: false
     default: 'Single'
+  prefix:
+    description: 'A prefix to all versions'
+    required: false
+    default: 'v'
 outputs:
   next-version:
-    description: 'The next semantic version for the next release'
+    description: 'The next semantic version for the next release without prefix'
+  next-version-name:
+    description: 'The next semantic version for the next release with prefix'
   folder:
     description: 'The name of the folder for the branch'
 runs:
@@ -42,3 +48,5 @@ runs:
     - ${{ inputs.branch }}
     - --projects
     - ${{ inputs.projects }}
+     - --prefix
+    - ${{ inputs.prefix }}

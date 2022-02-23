@@ -8,8 +8,7 @@
   // Spell Checker
   "cSpell.allowCompoundWords": true,
   "cSpell.language": "en",
-  "cSpell.words": [
-    "Skippable",
-    "Xunit"
-  ]
+  "cSpell.words": ["Skippable", "Xunit"],
+
+  "dotnet-test-explorer.testProjectPath": "src/*.sln"
 }

@@ -44,11 +44,11 @@ namespace Wemogy.ReleaseVersionAction
 
             // Get the major + minor version for the branch
             // Example: 1.2.0 for the branch release/1.2
-            var branchMajorMinorVersion = BranchHelpers.ExtractMajorMinorVersion(options.Branch, folderName);
+            var branchMajorMinorVersion = BranchHelpers.ExtractMajorMinorVersion(options.Branch, folderName, options.Prefix);
 
             // Get the latest released version for this branch by tags
             // Example: v1.2.8 for the branch release/1.2
-            var branchCurrentVersion = VersionHelpers.GetCurrentVersionFromTags(allTags, branchMajorMinorVersion, folderName);
+            var branchCurrentVersion = VersionHelpers.GetCurrentVersionFromTags(allTags, branchMajorMinorVersion, folderName, options.Prefix);
 
             // Get version for the next release
             SemVersion nextVersion;
@@ -68,16 +68,16 @@ namespace Wemogy.ReleaseVersionAction
             // Example: v1.2 and v1.2.4
             var tagsToSet = new List<string>
             {
-                $"v{branchMajorMinorVersion.Major}.{branchMajorMinorVersion.Minor}",
-                $"v{nextVersion}",
+                $"{options.Prefix}{branchMajorMinorVersion.Major}.{branchMajorMinorVersion.Minor}",
+                $"{options.Prefix}{nextVersion}",
             };
 
             // If the next version is the highest one amongst other tags with the same major version, set its tag
             // Example: v1
-            var isHightestVersion = VersionHelpers.IsHighestMinorVersion(allTags, nextVersion, folderName);
+            var isHightestVersion = VersionHelpers.IsHighestMinorVersion(allTags, nextVersion, folderName, options.Prefix);
             if (isHightestVersion)
             {
-                tagsToSet.Add($"v{branchMajorMinorVersion.Major}");
+                tagsToSet.Add($"{options.Prefix}{branchMajorMinorVersion.Major}");
             }
 
             Console.WriteLine(branchCurrentVersion != null
@@ -85,6 +85,7 @@ namespace Wemogy.ReleaseVersionAction
                 : $"No current version for branch {options.Branch}");
             Console.WriteLine($"Next version for branch {options.Branch} is: {nextVersion}");
             Console.WriteLine($"::set-output name=next-version::{nextVersion}");
+            Console.WriteLine($"::set-output name=next-version-name::{options.Prefix}{nextVersion}");
             Console.WriteLine($"::set-output name=folder::{folderName}");
             Console.WriteLine($"::set-output name=tags::{tagsToSet}");
         }

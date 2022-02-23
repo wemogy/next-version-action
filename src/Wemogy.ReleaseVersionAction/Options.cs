@@ -19,5 +19,8 @@ namespace Wemogy.ReleaseVersionAction
 
         [Option('p', "projects", Default = ProjectsType.Single, HelpText = "The amount of projects in this repo (Single or Multi)")]
         public ProjectsType Projects { get; set; }
+
+        [Option('x', "prefix", Default = "", HelpText = "A prefix to all versions")]
+        public string Prefix { get; set; }
     }
 }

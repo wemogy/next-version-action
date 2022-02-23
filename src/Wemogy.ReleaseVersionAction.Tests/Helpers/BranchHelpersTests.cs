@@ -19,15 +19,32 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
         }
 
         [Theory]
+        [InlineData("refs/heads/release/configuration/v0.1", "configuration", 0, 1)]
+        [InlineData("refs/heads/release/data-access/v0.2", "data-access", 0, 2)]
+        [InlineData("release/data-access/v0.2", "data-access", 0, 2)]
+        [InlineData("refs/heads/release/v0.2", "", 0, 2)]
+        [InlineData("release/v0.2", "", 0, 2)]
+        public void ExtractMajorMinorVersion_GivenPrefix_Works(string branch, string folderName, int expectedMajor, int expectedMinor)
+        {
+            // Act
+            var version = BranchHelpers.ExtractMajorMinorVersion(branch, folderName, "v");
+
+            // Assert
+            Assert.Equal(expectedMajor, version.Major);
+            Assert.Equal(expectedMinor, version.Minor);
+            Assert.Equal(0, version.Patch);
+        }
+
+        [Theory]
         [InlineData("refs/heads/release/configuration/0.1", "configuration", 0, 1)]
         [InlineData("refs/heads/release/data-access/0.2", "data-access", 0, 2)]
         [InlineData("release/data-access/0.2", "data-access", 0, 2)]
         [InlineData("refs/heads/release/0.2", "", 0, 2)]
         [InlineData("release/0.2", "", 0, 2)]
-        public void ExtractMajorMinorVersion_Works(string branch, string folderName, int expectedMajor, int expectedMinor)
+        public void ExtractMajorMinorVersion_GivenNoPrefix_Works(string branch, string folderName, int expectedMajor, int expectedMinor)
         {
             // Act
-            var version = BranchHelpers.ExtractMajorMinorVersion(branch, folderName);
+            var version = BranchHelpers.ExtractMajorMinorVersion(branch, folderName, string.Empty);
 
             // Assert
             Assert.Equal(expectedMajor, version.Major);

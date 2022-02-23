@@ -9,7 +9,7 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
     public class VersionHelpersTests
     {
         [Fact]
-        public void GetCurrentVersionFromTags_SingleProject_Works()
+        public void GetCurrentVersionFromTags_SingleProject_GivenNoPrefix_Works()
         {
             // Arrange
             var tags = new List<Tag>
@@ -19,7 +19,7 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
             };
 
             // Act
-            var version = VersionHelpers.GetCurrentVersionFromTags(tags, new SemVersion(0, 1, 0), "");
+            var version = VersionHelpers.GetCurrentVersionFromTags(tags, new SemVersion(0, 1, 0), string.Empty, string.Empty);
 
             // Assert
             Assert.Equal(0, version.Major);
@@ -28,7 +28,26 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
         }
 
         [Fact]
-        public void GetCurrentVersionFromTags_MultiProject_Works()
+        public void GetCurrentVersionFromTags_SingleProject_GivenPrefix_Works()
+        {
+            // Arrange
+            var tags = new List<Tag>
+            {
+                new Tag { TagName = "v0.1.0" },
+                new Tag { TagName = "v0.1.1" },
+            };
+
+            // Act
+            var version = VersionHelpers.GetCurrentVersionFromTags(tags, new SemVersion(0, 1, 0), string.Empty, "v");
+
+            // Assert
+            Assert.Equal(0, version.Major);
+            Assert.Equal(1, version.Minor);
+            Assert.Equal(1, version.Patch);
+        }
+
+        [Fact]
+        public void GetCurrentVersionFromTags_MultiProject_GivenNoPrefix_Works()
         {
             // Arrange
             var tags = new List<Tag>
@@ -41,7 +60,7 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
             };
 
             // Act
-            var version = VersionHelpers.GetCurrentVersionFromTags(tags, new SemVersion(0, 2, 0), "configuration");
+            var version = VersionHelpers.GetCurrentVersionFromTags(tags, new SemVersion(0, 2, 0), "configuration", string.Empty);
 
             // Assert
             Assert.Equal(0, version.Major);
@@ -51,7 +70,30 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
         }
 
         [Fact]
-        public void IsHighestMinorVersion_SingleProject_Works()
+        public void GetCurrentVersionFromTags_MultiProject_GivenPrefix_Works()
+        {
+            // Arrange
+            var tags = new List<Tag>
+            {
+                new Tag { TagName = "helpers-v0.1.52" },
+                new Tag { TagName = "configuration-v0.1.0" },
+                new Tag { TagName = "configuration-v0.1.1" },
+                new Tag { TagName = "service-configuration-v0.1.0" },
+                new Tag { TagName = "configuration-v0.2.0" }
+            };
+
+            // Act
+            var version = VersionHelpers.GetCurrentVersionFromTags(tags, new SemVersion(0, 2, 0), "configuration", "v");
+
+            // Assert
+            Assert.Equal(0, version.Major);
+            Assert.Equal(2, version.Minor);
+            Assert.Equal(0, version.Patch);
+            Assert.Equal("0.2.0", version.ToString());
+        }
+
+        [Fact]
+        public void IsHighestMinorVersion_SingleProject_GivenNoPrefix_Works()
         {
             // Arrange
             var tags = new List<Tag>
@@ -65,8 +107,8 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
             };
 
             // Act
-            var resultHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 2, 2), string.Empty);
-            var resultNonHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 1, 2), string.Empty);
+            var resultHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 2, 2), string.Empty, string.Empty);
+            var resultNonHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 1, 2), string.Empty, string.Empty);
 
             // Assert
             Assert.True(resultHighest);
@@ -74,7 +116,30 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
         }
 
         [Fact]
-        public void IsHighestMinorVersion_MultiProject_Works()
+        public void IsHighestMinorVersion_SingleProject_GivenPrefix_Works()
+        {
+            // Arrange
+            var tags = new List<Tag>
+            {
+                new Tag { TagName = "v0.1.0" },
+                new Tag { TagName = "v0.1.1" },
+                new Tag { TagName = "v0.1.2" },
+                new Tag { TagName = "v0.2.1" },
+                new Tag { TagName = "v0.2.2" },
+                new Tag { TagName = "v1.2.3" },
+            };
+
+            // Act
+            var resultHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 2, 2), string.Empty, "v");
+            var resultNonHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 1, 2), string.Empty, "v");
+
+            // Assert
+            Assert.True(resultHighest);
+            Assert.False(resultNonHighest);
+        }
+
+        [Fact]
+        public void IsHighestMinorVersion_MultiProject_GivenNoPrefix_Works()
         {
             // Arrange
             var tags = new List<Tag>
@@ -95,8 +160,38 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
             };
 
             // Act
-            var resultHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 2, 2), "helpers");
-            var resultNonHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 1, 2), "helpers");
+            var resultHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 2, 2), "helpers", string.Empty);
+            var resultNonHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 1, 2), "helpers", string.Empty);
+
+            // Assert
+            Assert.True(resultHighest);
+            Assert.False(resultNonHighest);
+        }
+
+        [Fact]
+        public void IsHighestMinorVersion_MultiProject_GivenPrefix_Works()
+        {
+            // Arrange
+            var tags = new List<Tag>
+            {
+                new Tag { TagName = "helpers-v0.1.0" },
+                new Tag { TagName = "helpers-v0.1.1" },
+                new Tag { TagName = "helpers-v0.1.2" },
+                new Tag { TagName = "helpers-v0.2.1" },
+                new Tag { TagName = "helpers-v0.2.2" },
+                new Tag { TagName = "helpers-v1.2.3" },
+                new Tag { TagName = "configuration-v0.1.0" },
+                new Tag { TagName = "configuration-v0.1.1" },
+                new Tag { TagName = "configuration-v0.1.2" },
+                new Tag { TagName = "configuration-v0.2.1" },
+                new Tag { TagName = "configuration-v0.2.2" },
+                new Tag { TagName = "configuration-v0.2.3" },
+                new Tag { TagName = "configuration-v1.2.3" }
+            };
+
+            // Act
+            var resultHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 2, 2), "helpers", "v");
+            var resultNonHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 1, 2), "helpers", "v");
 
             // Assert
             Assert.True(resultHighest);
