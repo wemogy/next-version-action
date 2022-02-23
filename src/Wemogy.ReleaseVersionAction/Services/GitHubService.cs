@@ -10,26 +10,26 @@ using Wemogy.ReleaseVersionAction.Models;
 
 namespace Wemogy.ReleaseVersionAction.Services
 {
-	public class GitHubService : IGitHubService
-	{
-		readonly HttpClient _httpClient;
+    public class GitHubService : IGitHubService
+    {
+        readonly HttpClient _httpClient;
 
-		public GitHubService(string username, string token)
-		{
-			_httpClient = new HttpClient();
-			_httpClient.BaseAddress = new Uri("https://api.github.com");
-			_httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("wemogy-action", "1"));
-			_httpClient.DefaultRequestHeaders.Authorization =
-				new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{token}")));
-		}
+        public GitHubService(string username, string token)
+        {
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("https://api.github.com");
+            _httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("wemogy-action", "1"));
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{token}")));
+        }
 
-		public async Task<List<Tag>> GetAllTagsAsync(string repository)
-		{
-			var url = $"/repos/{repository}/releases";
-			var response = await _httpClient.GetAsync(url);
-			var json = await response.Content.ReadAsStringAsync();
-			var tags = JsonSerializer.Deserialize<List<Tag>>(json);
-			return tags;
-		}
-	}
+        public async Task<List<Tag>> GetAllTagsAsync(string repository)
+        {
+            var url = $"/repos/{repository}/releases";
+            var response = await _httpClient.GetAsync(url);
+            var json = await response.Content.ReadAsStringAsync();
+            var tags = JsonSerializer.Deserialize<List<Tag>>(json);
+            return tags;
+        }
+    }
 }

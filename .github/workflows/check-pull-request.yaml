@@ -17,10 +17,13 @@ jobs:
         NUGET_AUTH_TOKEN: ${{ secrets.PACKAGE_FEED_TOKEN }}
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: src
     - name: Build
       run: dotnet build --no-restore
+      working-directory: src
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      working-directory: src
     - name: Docker
       run: docker build .
 
