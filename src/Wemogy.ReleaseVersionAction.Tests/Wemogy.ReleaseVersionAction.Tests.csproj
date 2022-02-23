@@ -7,11 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Semver" Version="2.0.6" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
-		<PackageReference Include="Wemogy.Core" Version="0.1.2" />
-    <PackageReference Include="Wemogy.Configuration" Version="0.1.4" />
     <PackageReference Include="xunit" Version="2.4.1" />
-		<PackageReference Include="Xunit.SkippableFact" Version="1.4.13" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -24,15 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Wemogy.ReleaseVersionAction\Wemogy.ReleaseVersionAction.csproj" />
-  </ItemGroup>
-
-	<ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="appsettings.Development.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

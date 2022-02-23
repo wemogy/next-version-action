@@ -1,7 +1,6 @@
-# ![wemogy](assets/wemogy-logo.png) Next Version (GitHub Action)
+# ![wemogy logo](https://wemogyimages.blob.core.windows.net/logos/wemogy-github-tiny.png) Next Version (GitHub Action)
 
 A GitHub Action for determining the version for the next release based on branch name and existing releases. This Action expects, that you use [Semantic Versioning](https://semver.org/) for your project
-
 
 #### Single Project Repository
 
@@ -16,7 +15,7 @@ Check the examples below for more details.
 ## Usage
 
 ```yaml
-- uses: wemogy/next-version-action@1.0.1
+- uses: wemogy/next-version-action@1.0.2
   id: release-version
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
