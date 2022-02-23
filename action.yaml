@@ -48,5 +48,5 @@ runs:
     - ${{ inputs.branch }}
     - --projects
     - ${{ inputs.projects }}
-     - --prefix
+    - --prefix
     - ${{ inputs.prefix }}
