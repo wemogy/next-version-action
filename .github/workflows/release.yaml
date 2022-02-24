@@ -31,10 +31,13 @@ jobs:
     # Build and Test
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: src
     - name: Build
       run: dotnet build --no-restore
+      working-directory: src
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      working-directory: src
       env:
         RedisCache__ConnectionString: ${{ secrets.REDIS_CONNECTION_STRING }}
         AzureBlobStorage__ConnectionString: ${{ secrets.AZUREBLOBSTORAGE_CONNECTION_STRING }}
