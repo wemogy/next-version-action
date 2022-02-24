@@ -33,3 +33,4 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         branch: 'release/1.0'
         projects: 'Single'
+        prefix: ''
