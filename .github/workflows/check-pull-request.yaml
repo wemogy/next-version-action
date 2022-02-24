@@ -23,6 +23,9 @@ jobs:
       working-directory: src
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      env:
+        GitHub__Username: ${{ secrets.GITHUB_USERNAME }}
+        GitHub__Token: ${{ secrets.GITHUB_TOKEN }}
       working-directory: src
     - name: Docker
       run: docker build .
