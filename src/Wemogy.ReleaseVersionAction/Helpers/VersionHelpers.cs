@@ -8,7 +8,7 @@ namespace Wemogy.ReleaseVersionAction.Helpers
 {
     public static class VersionHelpers
     {
-        public static SemVersion GetCurrentVersionFromTags(List<Tag> tags, SemVersion currentMajorMinorVersion, string folderName)
+        public static SemVersion GetCurrentVersionFromTags(List<Tag> tags, SemVersion currentMajorMinorVersion, string folderName, string prefix)
         {
             // Filter relevant tags only
             if (!string.IsNullOrEmpty(folderName))
@@ -20,7 +20,7 @@ namespace Wemogy.ReleaseVersionAction.Helpers
 
             // Extract semantic version number only
             var filtered = tags
-                .Select(x => SemVersion.Parse(TagHelpers.ExtractVersion(x, folderName)))
+                .Select(x => SemVersion.Parse(TagHelpers.ExtractVersion(x, folderName, prefix)))
                 .Where(x => x.Major == currentMajorMinorVersion.Major && x.Minor == currentMajorMinorVersion.Minor)
                 .ToList();
 
@@ -50,7 +50,7 @@ namespace Wemogy.ReleaseVersionAction.Helpers
         /// <param name="version">Version to check</param>
         /// <param name="folderName">Folder Name for Multi Project repos</param>
         /// <returns>True, if the version is the highest one for its major.</returns>
-        public static bool IsHighestMinorVersion(List<Tag> tags, SemVersion version, string folderName)
+        public static bool IsHighestMinorVersion(List<Tag> tags, SemVersion version, string folderName, string prefix)
         {
             // Filter relevant tags only
             if (!string.IsNullOrEmpty(folderName))
@@ -62,7 +62,7 @@ namespace Wemogy.ReleaseVersionAction.Helpers
 
             // Extract semantic version number only
             var filtered = tags
-                .Select(x => SemVersion.Parse(TagHelpers.ExtractVersion(x, folderName)))
+                .Select(x => SemVersion.Parse(TagHelpers.ExtractVersion(x, folderName, prefix)))
                 .Where(x => x.Major == version.Major)
                 .OrderBy(x => x.Minor)
                 .ToList();
