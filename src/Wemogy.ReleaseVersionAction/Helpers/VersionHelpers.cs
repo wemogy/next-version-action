@@ -8,7 +8,7 @@ namespace Wemogy.ReleaseVersionAction.Helpers
 {
     public static class VersionHelpers
     {
-        public static SemVersion GetCurrentVersionFromTags(List<Tag> tags, SemVersion currentMajorMinorVersion, string folderName, string prefix)
+        public static SemVersion? GetCurrentVersionFromTags(List<Tag> tags, SemVersion currentMajorMinorVersion, string folderName, string prefix)
         {
             // Filter relevant tags only
             if (!string.IsNullOrEmpty(folderName))
@@ -38,7 +38,7 @@ namespace Wemogy.ReleaseVersionAction.Helpers
             }
             else
             {
-                return currentMajorMinorVersion;
+                return null;
             }
         }
 

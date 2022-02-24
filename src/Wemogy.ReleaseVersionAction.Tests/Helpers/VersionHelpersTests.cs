@@ -28,6 +28,23 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
         }
 
         [Fact]
+        public void GetCurrentVersionFromTags_SingleProject_GivenNonExisting_ReturnsNull()
+        {
+            // Arrange
+            var tags = new List<Tag>
+            {
+                new Tag { TagName = "0.1.0" },
+                new Tag { TagName = "0.1.1" },
+            };
+
+            // Act
+            var version = VersionHelpers.GetCurrentVersionFromTags(tags, new SemVersion(0, 2, 0), string.Empty, string.Empty);
+
+            // Assert
+            Assert.Null(version);
+        }
+
+        [Fact]
         public void GetCurrentVersionFromTags_SingleProject_GivenPrefix_Works()
         {
             // Arrange
