@@ -52,6 +52,11 @@ namespace Wemogy.ReleaseVersionAction.Helpers
         /// <returns>True, if the version is the highest one for its major.</returns>
         public static bool IsHighestMinorVersion(List<Tag> tags, SemVersion version, string folderName, string prefix)
         {
+            if (!tags.Any())
+            {
+                return true;
+            }
+
             // Filter relevant tags only
             if (!string.IsNullOrEmpty(folderName))
             {
