@@ -214,5 +214,18 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
             Assert.True(resultHighest);
             Assert.False(resultNonHighest);
         }
+
+        [Fact]
+        public void IsHighestMinorVersion_GivenNoTags_ReturnsTrue()
+        {
+            // Arrange
+            var tags = new List<Tag>();
+
+            // Act
+            var resultHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 2, 2), string.Empty, "v");
+
+            // Assert
+            Assert.True(resultHighest);
+        }
     }
 }
