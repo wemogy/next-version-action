@@ -71,8 +71,13 @@ namespace Wemogy.ReleaseVersionAction.Helpers
                 .Where(x => x.Major == version.Major)
                 .OrderBy(x => x.Minor)
                 .ToList();
-
-            return filtered.Last() == version;
+            if (filtered.Any())
+            {
+                return filtered.Last() == version;
+            }
+            else {
+                return true;
+            }
         }
     }
 }

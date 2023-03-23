@@ -126,10 +126,12 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
             // Act
             var resultHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 2, 2), string.Empty, string.Empty);
             var resultNonHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 1, 2), string.Empty, string.Empty);
+            var resultNewMajor = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(2, 0, 0), string.Empty, string.Empty);
 
             // Assert
             Assert.True(resultHighest);
             Assert.False(resultNonHighest);
+            Assert.True(resultNewMajor);
         }
 
         [Fact]
@@ -149,10 +151,12 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
             // Act
             var resultHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 2, 2), string.Empty, "v");
             var resultNonHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 1, 2), string.Empty, "v");
+            var resultNewMajor = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(2, 0, 0), string.Empty, "v");
 
             // Assert
             Assert.True(resultHighest);
             Assert.False(resultNonHighest);
+            Assert.True(resultNewMajor);
         }
 
         [Fact]
@@ -179,10 +183,12 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
             // Act
             var resultHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 2, 2), "helpers", string.Empty);
             var resultNonHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 1, 2), "helpers", string.Empty);
+            var resultNewMajor = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(2, 0, 0), "helpers", string.Empty);
 
             // Assert
             Assert.True(resultHighest);
             Assert.False(resultNonHighest);
+            Assert.True(resultNewMajor);
         }
 
         [Fact]
@@ -209,10 +215,12 @@ namespace Wemogy.ReleaseVersionAction.Tests.Helpers
             // Act
             var resultHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 2, 2), "helpers", "v");
             var resultNonHighest = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(0, 1, 2), "helpers", "v");
+            var resultNewMajor = VersionHelpers.IsHighestMinorVersion(tags, new SemVersion(2, 0, 0), "helpers", "v");
 
             // Assert
             Assert.True(resultHighest);
             Assert.False(resultNonHighest);
+            Assert.True(resultNewMajor);
         }
 
         [Fact]
