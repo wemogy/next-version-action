@@ -6,6 +6,7 @@ namespace Wemogy.ReleaseVersionAction.Tests.Models
     public class SemVersionTests
     {
         [Theory]
+        [InlineData("0.2.3", 0, 2, 3)]
         [InlineData("1.2.3", 1, 2, 3)]
         [InlineData("1.2", 1, 2, 0)]
         public void Parse_Works(string input, int major, int minor, int patch)

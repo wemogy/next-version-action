@@ -10,7 +10,7 @@ using Wemogy.ReleaseVersionAction.Services;
 
 namespace Wemogy.ReleaseVersionAction
 {
-    class Program
+    public class Program
     {
         static IGitHubService _gitHubService;
 
@@ -22,7 +22,7 @@ namespace Wemogy.ReleaseVersionAction
                 errors => HandleParseError(errors));
         }
 
-        static async Task RunWithOptionsAsync(Options options)
+        public static async Task RunWithOptionsAsync(Options options)
         {
             _gitHubService = new GitHubService(options.Username, options.Token);
 
