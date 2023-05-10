@@ -12,37 +12,11 @@ jobs:
     steps:
 
     # Determine Release Version
-    - uses: wemogy/next-version-action@1.0.2
+    - uses: wemogy/next-version-action@2.0.2
       id: release-version
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         projects: 'Single'
-
-    # Setup
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
-        source-url: https://nuget.pkg.github.com/wemogy/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{ secrets.PACKAGE_FEED_TOKEN }}
-
-    # Build and Test
-    - name: Restore dependencies
-      run: dotnet restore
-      working-directory: src
-    - name: Build
-      run: dotnet build --no-restore
-      working-directory: src
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-      working-directory: src
-      env:
-        RedisCache__ConnectionString: ${{ secrets.REDIS_CONNECTION_STRING }}
-        AzureBlobStorage__ConnectionString: ${{ secrets.AZUREBLOBSTORAGE_CONNECTION_STRING }}
-    - name: Docker
-      run: docker build .
 
     # Create GitHub Release
     - name: Create GitHub Release

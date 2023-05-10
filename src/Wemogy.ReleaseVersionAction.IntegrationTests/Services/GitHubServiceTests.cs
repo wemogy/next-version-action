@@ -10,7 +10,7 @@ namespace Wemogy.ReleaseVersionAction.IntegrationTests.Services
     {
         private static GitHubService Setup()
         {
-            var configuration = ConfigurationFactory.BuildConfiguration();
+            var configuration = ConfigurationFactory.BuildConfiguration("Development");
             var username = configuration["GitHub:Username"];
             var token = configuration["GitHub:Token"];
 
