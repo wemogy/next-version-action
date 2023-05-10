@@ -17,6 +17,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         projects: 'Single'
+        prefix: ''
 
     # Create GitHub Release
     - name: Create GitHub Release
