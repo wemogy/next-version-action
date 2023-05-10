@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Wemogy.Configuration;
 using Wemogy.Core.Helpers;
 using Wemogy.ReleaseVersionAction.Services;
 using Xunit;
