@@ -15,7 +15,7 @@ Check the examples below for more details.
 ## Usage
 
 ```yaml
-- uses: wemogy/next-version-action@1.0.2
+- uses: wemogy/next-version-action@2.0.2
   id: release-version
   with:
     token: ${{ secrets.GITHUB_TOKEN }}

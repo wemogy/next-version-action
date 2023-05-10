@@ -27,6 +27,7 @@ namespace Wemogy.ReleaseVersionAction.Services
         {
             var url = $"/repos/{repository}/releases";
             var response = await _httpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync();
             var tags = JsonSerializer.Deserialize<List<Tag>>(json);
             return tags;
