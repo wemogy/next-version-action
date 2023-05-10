@@ -57,7 +57,7 @@ namespace Wemogy.ReleaseVersionAction.Helpers
                 return true;
             }
 
-            // Filter relevant tags only
+            // If folders are used, filter relevant tags to those of the current folder only
             if (!string.IsNullOrEmpty(folderName))
             {
                 tags = tags
@@ -68,11 +68,16 @@ namespace Wemogy.ReleaseVersionAction.Helpers
             // Extract semantic version number only
             var filtered = tags
                 .Select(x => SemVersion.Parse(TagHelpers.ExtractVersion(x, folderName, prefix)))
-                .Where(x => x.Major == version.Major)
-                .OrderBy(x => x.Minor)
-                .ToList();
+                .Where(x => x.Major == version.Major);
 
-            return filtered.Last() == version;
+            // If there are no other tags for this major version, the current version is the highest.
+            if (!filtered.Any())
+            {
+                return true;
+            }
+
+            var highestVersion = filtered.OrderBy(x => x.Minor).Last();
+            return highestVersion == version;
         }
     }
 }

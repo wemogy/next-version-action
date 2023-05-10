@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using CommandLine;
 using Semver;
@@ -10,7 +11,7 @@ using Wemogy.ReleaseVersionAction.Services;
 
 namespace Wemogy.ReleaseVersionAction
 {
-    class Program
+    public class Program
     {
         static IGitHubService _gitHubService;
 
@@ -22,7 +23,7 @@ namespace Wemogy.ReleaseVersionAction
                 errors => HandleParseError(errors));
         }
 
-        static async Task RunWithOptionsAsync(Options options)
+        public static async Task RunWithOptionsAsync(Options options)
         {
             _gitHubService = new GitHubService(options.Username, options.Token);
 
@@ -87,7 +88,7 @@ namespace Wemogy.ReleaseVersionAction
             Console.WriteLine($"::set-output name=next-version::{nextVersion}");
             Console.WriteLine($"::set-output name=next-version-name::{options.Prefix}{nextVersion}");
             Console.WriteLine($"::set-output name=folder::{folderName}");
-            Console.WriteLine($"::set-output name=tags::{tagsToSet}");
+            Console.WriteLine($"::set-output name=tags::{JsonSerializer.Serialize(tagsToSet)}");
         }
 
         static Task HandleParseError(IEnumerable<Error> errors)
