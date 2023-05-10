@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Wemogy.Configuration;
 using Wemogy.Core.Helpers;
 using Wemogy.ReleaseVersionAction.Services;
 using Xunit;
@@ -11,7 +12,7 @@ namespace Wemogy.ReleaseVersionAction.IntegrationTests
         public async Task RunAsync_GivenValid_RunsWithoutCrashing()
         {
             // Arrange
-            var configuration = ConfigurationFactory.BuildConfiguration();
+            var configuration = ConfigurationFactory.BuildConfiguration("Development");
             var username = configuration["GitHub:Username"];
             var token = configuration["GitHub:Token"];
             var options = new Options

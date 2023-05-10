@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using CommandLine;
 using Semver;
@@ -87,7 +88,7 @@ namespace Wemogy.ReleaseVersionAction
             Console.WriteLine($"::set-output name=next-version::{nextVersion}");
             Console.WriteLine($"::set-output name=next-version-name::{options.Prefix}{nextVersion}");
             Console.WriteLine($"::set-output name=folder::{folderName}");
-            Console.WriteLine($"::set-output name=tags::{tagsToSet}");
+            Console.WriteLine($"::set-output name=tags::{JsonSerializer.Serialize(tagsToSet)}");
         }
 
         static Task HandleParseError(IEnumerable<Error> errors)
